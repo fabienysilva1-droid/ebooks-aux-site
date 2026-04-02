@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EbooksAUX — Ebooks Personalizados em 24h</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --k:#0f0f0f;--w:#ffffff;--off:#fafaf8;
+  --y:#f5c800;--yl:#fff9d6;--yd:#d4ab00;
+  --g1:#f4f4f4;--g2:#e8e8e8;--g4:#aaaaaa;--g6:#666666;--g8:#2a2a2a;
+  --r:4px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--w);color:var(--k);line-height:1.6;overflow-x:hidden;width:100%}
+
+/* UTILS */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sec{padding:80px 0}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--yd);margin-bottom:12px;display:block}
+.ttl{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+.sub{font-size:1rem;color:var(--g6);max-width:520px;line-height:1.7}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:.95rem;font-weight:700;padding:16px 32px;border:none;border-radius:var(--r);cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s;letter-spacing:.01em;white-space:nowrap}
+.btn-y{background:var(--y);color:var(--k)}
+.btn-y:hover{background:var(--yd);transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,200,0,.35)}
+.btn-k{background:var(--k);color:var(--w)}
+.btn-k:hover{background:var(--g8);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.btn-o{background:transparent;color:rgba(255,255,255,.7);border:2px solid rgba(255,255,255,.2);font-size:.9rem;font-weight:600;padding:14px 28px;border-radius:var(--r);cursor:pointer;text-decoration:none;transition:all .18s;display:inline-flex;align-items:center}
+.btn-o:hover{background:rgba(255,255,255,.08)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--g2);padding:0 24px}
+.nav-i{max-width:1080px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--k);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--yd)}
+.nav-l{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-l a{font-size:.85rem;font-weight:500;color:var(--g6);text-decoration:none;transition:color .15s}
+.nav-l a:hover{color:var(--k)}
+.nav-cta{padding:10px 20px!important;font-size:.82rem!important}
+@media(max-width:640px){.nav-l{display:none}}
+
+/* HERO */
+.hero{background:var(--k);color:var(--w);padding:100px 24px 90px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:radial-gradient(circle,rgba(245,200,0,.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(245,200,0,.07) 0%,transparent 70%);pointer-events:none}
+.hero-g{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,200,0,.12);border:1px solid rgba(245,200,0,.3);color:var(--y);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em}
+.hero h1 em{color:var(--y);font-style:italic}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:36px;max-width:440px}
+.hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hero-note{font-size:.78rem;color:rgba(255,255,255,.35);margin-top:16px;display:flex;align-items:center;gap:6px}
+/* mockup */
+.mv{display:flex;justify-content:center;align-items:center}
+.mw{position:relative;width:280px}
+.mb-corner{position:absolute;top:-12px;right:20px;background:var(--y);color:var(--k);font-size:10px;font-weight:800;padding:5px 12px;border-radius:100px;box-shadow:0 4px 12px rgba(245,200,0,.4);z-index:2}
+.mc{background:var(--w);border-radius:12px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08)}
+.mcov{background:linear-gradient(135deg,#0f0f0f,#1a1a1a);padding:32px 28px;border-bottom:3px solid var(--y);position:relative;overflow:hidden}
+.mcov::after{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:radial-gradient(circle,rgba(245,200,0,.15),transparent 70%)}
+.mt{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--y);margin-bottom:14px}
+.mtt{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--w);line-height:1.2;margin-bottom:8px}
+.ms{font-size:.7rem;color:rgba(255,255,255,.4)}
+.mbody{padding:20px 24px;background:var(--w)}
+.ml{height:7px;border-radius:4px;background:var(--g2);margin-bottom:8px}
+.ml.sh{width:65%}.ml.md{width:80%}.ml.fl{width:100%}.ml.ac{background:rgba(245,200,0,.3);width:40%}
+.mfl{position:absolute;bottom:-16px;left:-16px;background:var(--w);border-radius:12px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px}
+.mfi{width:36px;height:36px;background:var(--y);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.mft{font-size:11px;color:var(--k)}
+.mft strong{display:block;font-size:12px;font-weight:700}
+@media(max-width:768px){
+  .hero-g{grid-template-columns:1fr;gap:0}
+  .mv{display:none}
+  .hero{padding:64px 24px 72px}
+}
+
+/* PROOF BAR */
+.pb{background:var(--y);padding:16px 24px}
+.pb-i{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
+.ps{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--k)}
+.ps .n{font-weight:900;font-size:1rem}
+.pd{width:1px;height:20px;background:rgba(0,0,0,.2);flex-shrink:0}
+@media(max-width:500px){.pd{display:none}.pb-i{gap:12px}}
+
+/* HOW */
+.how{background:var(--off)}
+.hg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.hs{background:var(--w);padding:40px 32px;position:relative;border:1px solid var(--g2);transition:box-shadow .2s;min-width:0}
+.hs:hover{box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.hn{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--y);line-height:1;margin-bottom:20px;opacity:.4}
+.hi{font-size:1.6rem;margin-bottom:14px;display:block}
+.hs h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.hs p{font-size:.9rem;color:var(--g6);line-height:1.65}
+.ac{position:absolute;right:-14px;top:50%;transform:translateY(-50%);z-index:5;background:var(--y);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:var(--k);border:3px solid var(--off)}
+@media(max-width:720px){.hg{grid-template-columns:1fr}.ac{display:none}}
+
+/* BENEFITS */
+.bg2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.bc{display:flex;align-items:flex-start;gap:20px;padding:28px;border:1px solid var(--g2);border-radius:var(--r);transition:border-color .2s,box-shadow .2s;min-width:0}
+.bc:hover{border-color:var(--y);box-shadow:0 4px 20px rgba(245,200,0,.1)}
+.bic{width:48px;height:48px;min-width:48px;background:var(--yl);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.bc h3{font-size:.98rem;font-weight:700;margin-bottom:5px}
+.bc p{font-size:.875rem;color:var(--g6);line-height:1.6}
+@media(max-width:620px){.bg2{grid-template-columns:1fr}}
+
+/* USE CASES */
+.uc{background:var(--k);color:var(--w)}
+.uc .ttl{color:var(--w)}
+.uc .sub{color:rgba(255,255,255,.5)}
+.ucg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.ucc{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:var(--r);padding:28px 24px;transition:border-color .2s,transform .2s;cursor:default;min-width:0}
+.ucc:hover{border-color:var(--y);transform:translateY(-4px)}
+.uce{font-size:1.8rem;margin-bottom:14px;display:block}
+.ucc h3{font-size:.95rem;font-weight:700;color:var(--w);margin-bottom:8px}
+.ucc p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.6}
+.uct{display:inline-block;margin-top:14px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--y);border:1px solid rgba(245,200,0,.3);padding:4px 10px;border-radius:100px}
+@media(max-width:860px){.ucg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.ucg{grid-template-columns:1fr}}
+
+/* TESTIMONIALS */
+.tst{background:var(--off)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.tc{background:var(--w);border:1px solid var(--g2);padding:32px 28px;border-radius:var(--r);position:relative;transition:box-shadow .2s;min-width:0}
+.tc:hover{box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.tc::before{content:'"';position:absolute;top:20px;right:24px;font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--y);opacity:.3;line-height:1}
+.stars{color:var(--y);font-size:.9rem;margin-bottom:14px}
+.tx{font-size:.95rem;color:var(--g8);line-height:1.7;margin-bottom:20px;font-style:italic}
+.ta{display:flex;align-items:center;gap:12px}
+.tav{width:40px;height:40px;min-width:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:var(--k);flex-shrink:0}
+.tn{font-size:.9rem;font-weight:700}
+.ti{font-size:.78rem;color:var(--g4);margin-top:1px}
+@media(max-width:720px){.tg{grid-template-columns:1fr}}
+
+/* SECURITY */
+.sec2{background:var(--w)}
+.si{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.sbg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.sb{display:flex;align-items:flex-start;gap:12px;padding:20px;background:var(--g1);border-radius:var(--r);min-width:0}
+.sbi{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.sb strong{font-size:.85rem;display:block;margin-bottom:2px}
+.sb span{font-size:.78rem;color:var(--g6)}
+.pm{margin-top:28px}
+.pm p{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--g4);margin-bottom:12px}
+.pics{display:flex;gap:10px;flex-wrap:wrap}
+.pc{background:var(--g1);border:1px solid var(--g2);border-radius:6px;padding:8px 14px;font-size:.75rem;font-weight:600;color:var(--g6);display:flex;align-items:center;gap:6px}
+.sv{display:flex;justify-content:center}
+.sm{background:var(--k);border-radius:16px;padding:32px;width:100%;max-width:340px;box-shadow:0 24px 60px rgba(0,0,0,.12)}
+.smh{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #2a2a2a}
+.smt{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--w)}
+.sl{background:rgba(245,200,0,.15);color:var(--y);font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid rgba(245,200,0,.3);display:flex;align-items:center;gap:5px}
+.sits{display:flex;flex-direction:column;gap:12px}
+.sit{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#1a1a1a;border-radius:8px}
+.sii{width:36px;height:36px;min-width:36px;background:var(--y);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:var(--k)}
+.sit strong{display:block;font-size:.8rem;color:var(--w);margin-bottom:1px}
+.sit span{font-size:.7rem;color:rgba(255,255,255,.35)}
+@media(max-width:720px){
+  .si{grid-template-columns:1fr}
+  .sv{display:none}
+  .sbg{grid-template-columns:1fr}
+}
+
+/* CTA FINAL */
+.ctaf{background:var(--y);padding:90px 24px;text-align:center;position:relative;overflow:hidden}
+.ctaf::before{content:'AUX';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:clamp(6rem,20vw,18rem);font-weight:900;color:rgba(0,0,0,.04);pointer-events:none;letter-spacing:-.05em;white-space:nowrap}
+.ctaf .lbl{color:rgba(0,0,0,.5)}
+.ctaf h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--k);line-height:1.15;max-width:600px;margin:0 auto 16px}
+.ctaf p{font-size:1rem;color:rgba(0,0,0,.6);max-width:440px;margin:0 auto 36px;line-height:1.7}
+.cn{margin-top:16px;font-size:.78rem;color:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--k);color:var(--w);padding:40px 24px}
+.fi{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.fl2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--w)}
+.fl2 span{color:var(--y)}
+.flinks{display:flex;gap:24px;list-style:none;flex-wrap:wrap}
+.flinks a{font-size:.8rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:var(--w)}
+.fc{font-size:.75rem;color:rgba(255,255,255,.2);width:100%;text-align:center;padding-top:20px;border-top:1px solid #1e1e1e;margin-top:16px}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.a{opacity:0}
+.a.v{animation:fadeUp .55s ease forwards}
+.a.d1.v{animation-delay:.05s}
+.a.d2.v{animation-delay:.12s}
+.a.d3.v{animation-delay:.19s}
+.a.d4.v{animation-delay:.26s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-i">
+    <a href="#" class="logo">Ebooks<span>AUX</span></a>
+    <ul class="nav-l">
+      <li><a href="#como">Como funciona</a></li>
+      <li><a href="#ben">Benefícios</a></li>
+      <li><a href="#av">Avaliações</a></li>
+      <li><a href="#cta" class="btn btn-y nav-cta">Quero meu ebook</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="hero-g">
+    <div>
+      <div class="badge">⚡ Entrega em até 24h</div>
+      <h1>Ebooks <em>personalizados</em> feitos para você em 24h</h1>
+      <p>Transformamos sua ideia em um ebook claro, bonito e direto ao ponto — sem você perder horas pesquisando.</p>
+      <div class="hero-cta">
+        <a href="#cta" class="btn btn-y">Quero meu ebook →</a>
+        <a href="#como" class="btn-o">Como funciona</a>
+      </div>
+      <div class="hero-note">🔒 Pagamento 100% seguro &nbsp;·&nbsp; Sem mensalidade</div>
+    </div>
+    <div class="mv">
+      <div class="mw">
+        <div class="mb-corner">24h ✓</div>
+        <div class="mc">
+          <div class="mcov">
+            <div class="mt">EbooksAUX — Personalizado</div>
+            <div class="mtt">Finanças Pessoais<br>para Começar Hoje</div>
+            <div class="ms">Guia completo e direto ao ponto</div>
+          </div>
+          <div class="mbody">
+            <div class="ml ac"></div>
+            <div class="ml fl"></div>
+            <div class="ml md"></div>
+            <div class="ml fl"></div>
+            <div class="ml sh"></div>
+            <div style="height:12px"></div>
+            <div class="ml ac"></div>
+            <div class="ml fl"></div>
+            <div class="ml md"></div>
+          </div>
+        </div>
+        <div class="mfl">
+          <div class="mfi">📩</div>
+          <div class="mft"><strong>Entrega garantida</strong>Em até 24 horas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pb">
+  <div class="pb-i">
+    <div class="ps">⭐ <span class="n">4.9</span> de avaliação</div>
+    <div class="pd"></div>
+    <div class="ps">📚 <span class="n">+500</span> ebooks entregues</div>
+    <div class="pd"></div>
+    <div class="ps">⏱️ <span class="n">24h</span> de entrega</div>
+    <div class="pd"></div>
+    <div class="ps">💬 <span class="n">98%</span> satisfeitos</div>
+  </div>
+</div>
+
+<section class="sec how" id="como">
+  <div class="wrap">
+    <span class="lbl a">Como funciona</span>
+    <h2 class="ttl a d1">Simples assim.<br>Em 3 passos.</h2>
+    <p class="sub a d2">Sem complicação. Você escolhe o tema e nós cuidamos do resto.</p>
+    <div class="hg">
+      <div class="hs a d1">
+        <div class="hn">01</div>
+        <span class="hi">🎯</span>
+        <h3>Você escolhe o tema</h3>
+        <p>Nos diga sobre o que quer o ebook, o público e o objetivo. Pode ser qualquer assunto.</p>
+        <div class="ac">→</div>
+      </div>
+      <div class="hs a d2">
+        <div class="hn">02</div>
+        <span class="hi">✍️</span>
+        <h3>Criamos o conteúdo</h3>
+        <p>Nossa equipe pesquisa, estrutura e escreve um conteúdo personalizado, organizado e confiável.</p>
+        <div class="ac">→</div>
+      </div>
+      <div class="hs a d3">
+        <div class="hn">03</div>
+        <span class="hi">📥</span>
+        <h3>Você recebe em PDF</h3>
+        <p>Ebook pronto, com design limpo e profissional, direto na sua caixa de entrada em até 24h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ben">
+  <div class="wrap">
+    <span class="lbl a">Por que escolher</span>
+    <h2 class="ttl a d1">Feito para quem<br>não tem tempo a perder</h2>
+    <p class="sub a d2">Cada detalhe foi pensado para você ter resultado rápido, sem dor de cabeça.</p>
+    <div class="bg2">
+      <div class="bc a d1"><div class="bic">⏳</div><div><h3>Economize horas de pesquisa</h3><p>Nós fazemos toda a pesquisa e curadoria por você. Conteúdo pronto para usar.</p></div></div>
+      <div class="bc a d2"><div class="bic">✅</div><div><h3>Conteúdo organizado e confiável</h3><p>Tudo estruturado com clareza, linguagem simples e informação de qualidade.</p></div></div>
+      <div class="bc a d3"><div class="bic">💰</div><div><h3>Pronto para estudar ou vender</h3><p>Use para aprender, montar aula, vender como produto digital ou distribuir.</p></div></div>
+      <div class="bc a d4"><div class="bic">🎨</div><div><h3>Design simples e profissional</h3><p>Layout limpo, agradável de ler e visualmente atraente — sem precisar de designer.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec uc">
+  <div class="wrap">
+    <span class="lbl a">Exemplos de uso</span>
+    <h2 class="ttl a d1">Para cada objetivo,<br>um ebook.</h2>
+    <p class="sub a d2">Não importa o nicho. Se você tem uma ideia, a gente transforma em conteúdo.</p>
+    <div class="ucg">
+      <div class="ucc a d1"><span class="uce">💸</span><h3>Vender online</h3><p>Produto digital pronto para gerar renda na internet.</p><span class="uct">Renda digital</span></div>
+      <div class="ucc a d2"><span class="uce">📖</span><h3>Estudar para provas</h3><p>Resumos organizados para absorver o conteúdo mais rápido.</p><span class="uct">Educação</span></div>
+      <div class="ucc a d3"><span class="uce">💳</span><h3>Finanças pessoais</h3><p>Guias práticos sobre controle financeiro e investimentos.</p><span class="uct">Finanças</span></div>
+      <div class="ucc a d4"><span class="uce">💄</span><h3>Nicho de beleza</h3><p>Conteúdo especializado para profissionais ou entusiastas.</p><span class="uct">Lifestyle</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tst" id="av">
+  <div class="wrap">
+    <span class="lbl a">Avaliações</span>
+    <h2 class="ttl a d1">Quem pediu,<br>aprovou.</h2>
+    <div class="tg">
+      <div class="tc a d1">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="tx">"Pedi um ebook sobre finanças e ficou perfeito. Me poupou muito tempo de pesquisa e ficou exatamente do jeito que eu precisava."</p>
+        <div class="ta"><div class="tav" style="background:#f5c800">A</div><div><div class="tn">Ana Clara</div><div class="ti">26 anos · Empreendedora</div></div></div>
+      </div>
+      <div class="tc a d2">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="tx">"Usei o ebook para vender online e funcionou super bem. Em menos de uma semana já tinha recuperado o investimento. Recomendo!"</p>
+        <div class="ta"><div class="tav" style="background:#ffd6e7">C</div><div><div class="tn">Carla Mendes</div><div class="ti">22 anos · Criadora de conteúdo</div></div></div>
+      </div>
+      <div class="tc a d3">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="tx">"Simples, direto e muito bem feito. Recebi no prazo prometido e o conteúdo superou as expectativas. Com certeza vou pedir mais."</p>
+        <div class="ta"><div class="tav" style="background:#d4f0ff">J</div><div><div class="tn">João Paulo</div><div class="ti">30 anos · Estudante</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec2" id="pag">
+  <div class="wrap">
+    <div class="si">
+      <div>
+        <span class="lbl a">Segurança e pagamento</span>
+        <h2 class="ttl a d1">Compre com<br>total tranquilidade</h2>
+        <p class="sub a d2">Sua compra é 100% protegida. Garantimos a entrega ou devolvemos seu dinheiro.</p>
+        <div class="sbg a d2">
+          <div class="sb"><span class="sbi">🔒</span><div><strong>Pagamento seguro</strong><span>Dados protegidos com criptografia</span></div></div>
+          <div class="sb"><span class="sbi">⚡</span><div><strong>Entrega em 24h</strong><span>Garantida ou reembolso total</span></div></div>
+          <div class="sb"><span class="sbi">💬</span><div><strong>Suporte ativo</strong><span>Atendemos suas dúvidas</span></div></div>
+          <div class="sb"><span class="sbi">🔄</span><div><strong>Revisão incluída</strong><span>Ajustes sem custo extra</span></div></div>
+        </div>
+        <div class="pm a d3">
+          <p>Formas de pagamento</p>
+          <div class="pics">
+            <div class="pc">💳 Crédito</div>
+            <div class="pc">🏦 Débito</div>
+            <div class="pc">📱 Pix</div>
+            <div class="pc">🎫 Boleto</div>
+          </div>
+        </div>
+      </div>
+      <div class="sv a d2">
+        <div class="sm">
+          <div class="smh"><div class="smt">EbooksAUX</div><div class="sl">🔒 Seguro</div></div>
+          <div class="sits">
+            <div class="sit"><div class="sii">📚</div><div><strong>Ebook Personalizado</strong><span>Entrega em até 24 horas</span></div></div>
+            <div class="sit"><div class="sii">✅</div><div><strong>Revisão incluída</strong><span>Ajustes sem custo extra</span></div></div>
+            <div class="sit"><div class="sii">🔄</div><div><strong>Garantia de devolução</strong><span>Reembolso total se não gostar</span></div></div>
+            <div class="sit"><div class="sii">💬</div><div><strong>Suporte incluído</strong><span>Atendimento dedicado</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ctaf" id="cta">
+  <div class="wrap" style="position:relative;z-index:2">
+    <span class="lbl a">Pronto para começar?</span>
+    <h2 class="a d1">Comece agora e receba seu ebook personalizado</h2>
+    <p class="a d2">Sem enrolação. Você pede, a gente cria. Em até 24 horas, seu ebook chega pronto.</p>
+    <a href="#" class="btn btn-k a d3">Comprar agora →</a>
+    <div class="cn a d4">🔒 Pagamento seguro &nbsp;·&nbsp; Entrega em 24h &nbsp;·&nbsp; Satisfação ou reembolso</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="fl2">Ebooks<span>AUX</span></div>
+    <ul class="flinks">
+      <li><a href="#">Como funciona</a></li>
+      <li><a href="#">Avaliações</a></li>
+      <li><a href="#">Contato</a></li>
+      <li><a href="#">Privacidade</a></li>
+    </ul>
+  </div>
+  <div class="wrap"><div class="fc">© 2025 EbooksAUX. Todos os direitos reservados.</div></div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.a').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
