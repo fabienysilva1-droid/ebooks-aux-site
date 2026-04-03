@@ -52,6 +52,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em}
 .hero h1 em{color:var(--y);font-style:italic}
 .hero p{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:36px;max-width:440px}
+.price-box{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:-10px 0 28px}
+.price-old{font-size:1rem;color:rgba(255,255,255,.38);text-decoration:line-through}
+.price-new{font-size:2rem;font-weight:800;color:var(--y);line-height:1}
+.price-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,200,0,.12);border:1px solid rgba(245,200,0,.28);color:var(--y);font-size:.78rem;font-weight:700;padding:8px 14px;border-radius:999px}
 .hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .hero-note{font-size:.78rem;color:rgba(255,255,255,.35);margin-top:16px;display:flex;align-items:center;gap:6px}
 /* mockup */
@@ -209,10 +213,15 @@ footer{background:var(--k);color:var(--w);padding:40px 24px}
     <div>
       <div class="badge">⚡ Entrega em até 24h</div>
       <h1>Ebooks <em>personalizados</em> feitos para você em 24h</h1>
-      <p>Transformamos sua ideia em um ebook claro, bonito e direto ao ponto — sem você perder horas pesquisando.</p>
-      <div class="hero-cta">
+     <p>Transformamos sua ideia em um ebook claro, bonito e direto ao ponto — sem você perder horas pesquisando.</p>
+<div class="price-box">
+  <span class="price-old">de 29€</span>
+  <span class="price-new">por apenas 15€</span>
+  <span class="price-badge">Oferta de inauguração</span>
+</div>
+<div class="hero-cta">
         <a href="https://buy.stripe.com/9B6dR2chUf47eFd39j1wY00" target="_blank" class="btn btn-y">
-  Quero meu ebook →
+  Quero meu ebook por 15€ →
 </a>
         <a href="#como" class="btn-o">Como funciona</a>
       </div>
